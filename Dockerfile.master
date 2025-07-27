@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk wget git curl gnupg && \
+    wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | apt-key add - && \
+    sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' && \
+    apt-get update && apt-get install -y jenkins && \
+    mkdir -p /var/jenkins_home
+
+EXPOSE 8080 50000
+
+CMD ["java", "-jar", "/usr/share/java/jenkins.war"]
+

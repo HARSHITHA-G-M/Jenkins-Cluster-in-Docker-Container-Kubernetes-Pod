@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jenkins-agent
+  template:
+    metadata:
+      labels:
+        app: jenkins-agent
+    spec:
+      containers:
+        - name: jenkins-agent
+          image: custom-jenkins-agent
+          command: ["/bin/sh", "-c", "sleep 3600"]
+

@@ -1,0 +1,11 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk wget git curl && \
+    useradd -m jenkins
+
+WORKDIR /home/jenkins
+CMD ["sleep", "infinity"]
+
